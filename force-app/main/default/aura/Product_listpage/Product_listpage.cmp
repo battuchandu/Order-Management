@@ -1,0 +1,39 @@
+<aura:component controller="Product_list_page" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="Prdts" type="List"/>
+    <aura:attribute name="Quantity" type="Integer" default="0"/>
+    <aura:attribute name="Category" type="string" default="all" />
+    <aura:attribute name="divid" type="string"  />
+    <aura:attribute name="buttonid" type="string"  />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getProducts}" />
+    
+    <div >
+        
+        <!-- <lightning:button variant="brand-outline" label="Products" title="Products" onclick="{! c.getProducts }" /> -->
+        
+        <lightning:layout multipleRows="true" >
+            <aura:iteration aura:id="ite" items="{!v.Prdts}" var="prd" indexVar="index" >
+                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="4"  padding="around-small" >
+                    <div  id="it1" name="{!prd.prdt.Id}">
+                        <lightning:card   >
+                            
+                            <img class ="wrd" src="{!prd.hprdimg.URL__c}" alt="Not Available" onclick="{!c.Prddetails}" id="{!prd.prdt.Id}"/><br></br>
+                            <span class="wrd" onclick="{!c.Prddetails}" id="{!prd.prdt.Id}"> <b>{!prd.prdt.Name}</b> </span><br/><br/>
+                            <span class="wrd"> <b>₹</b> {!prd.prdt.Price__c} </span><br/><br/>
+                            <span class="wrd"><lightning:button label="-" title="Qndown" value="{!prd.prdt.Id}" onclick="{!c.quantity}"/></span>
+                            <span class="wrd"><b>{!prd.quantity}</b></span>
+                            <span class="wrd" ><lightning:button label="+" title="Qnup" value="{!prd.prdt.Id}" onclick="{!c.quantity}" /></span>
+                            <span class="wrd" onclick="{!c.addtocart}" id="{!prd.prdt.Id}"> <lightning:icon iconName="standard:webcart" alternativeText="Add_to_cart" title="Add_to_cart" /></span> 
+                            
+                            <!--       <span class="wrd"><lightning:buttonIcon iconName="utility:cart" variant="brand" alternativeText="Add to cart" title="Add to cart" onclick="{!addtocart}" value="{!prd.prdt.Id}" /></span>   -->
+                            
+                        </lightning:card>
+                    </div>
+                </lightning:layoutItem>
+            </aura:iteration>
+            
+        </lightning:layout>
+        
+        <c:Addtocart aura:id="showModal" />
+    </div>
+</aura:component>

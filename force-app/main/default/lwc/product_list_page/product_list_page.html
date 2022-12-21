@@ -1,0 +1,26 @@
+<template>
+       <!--   1. Hero Image
+    2. Name
+    3. Price
+    4. Short Description
+    5. In Stock or Out of Stock
+    6. Quantity along with -+ button
+    7. Add To Cart Button -->  
+
+    <lightning-layout multiple-rows="true">
+        <template for:each={prdimgs.data} for:item="prd">
+            <lightning-layout-item size="12" small-device-size="6" medium-device-size="4" large-device-size="4"  padding="around-small" key={prd.prdt.Id}>
+            <lightning-card > 
+                                  
+                <img class ="wrd" src={prd.hprdimg.URL__c} alt="Not Available" id={prd.prdt.Id} onclick={gid}/><br></div>
+                <span class="wrd" id={prd.prdt.Id}> <b>{prd.prdt.Name}</b> </span>
+                <span class="wrd"> <b>₹</b> {prd.prdt.Price__c} </span> 
+                <span class="wrd"> <b>Quantity: </b>{prd.prdt.Remaining_Quantity__c} </span>
+                <span class="wrd"><lightning-icon icon-name="standard:webcart" alternative-text="Add_to_cart" title="Add_to_cart"></lightning-icon></span>
+            </lightning-card>
+        </lightning-layout-item>
+        </template>
+    </lightning-layout>
+
+
+</template>

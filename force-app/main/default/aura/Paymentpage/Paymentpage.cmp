@@ -1,0 +1,34 @@
+<aura:component implements="force:appHostable" >
+    <aura:attribute name="options" type="List" default="[{'label': 'COD', 'value': 'cod'} ]"/>
+    <aura:attribute name="options1" type="List" default="[
+                                                         {'label': 'UPI', 'value': 'option1'},
+                                                         {'label': 'Debit Card', 'value': 'option2'},
+                                                         {'label': 'Credit Card', 'value': 'option3'}
+                                                         ]"/>
+    <aura:attribute name="value" type="String" default="cod"/>
+    <!--  <div class="slds-p-top_small">
+        <div class="slds-form-element buttons slds-text-align_center">
+            <lightning:button variant="brand-outline" label="Payment Mode" title="Payment" onclick="{! c.handleClick }" />
+        </div>
+    </div> -->
+    
+    <div style="padding:1rem" >
+        <lightning:radioGroup name="Payment Mode"
+                              label="Payment Mode"
+                              options="{! v.options }"
+                              value="{! v.value }"
+                              type="radio"/>
+        <lightning:radioGroup name="radioGroupDisabled"
+                              label=""
+                              options="{! v.options1 }"
+                              value=""
+                              type="radio"
+                              disabled="true"/>
+        <br></br>
+        <h1>*Right now we are accepting only COD</h1>
+    </div>
+    <div class="slds-p-left_small"  >
+        <lightning:button variant="brand" label="Place Order" title="Payment" onclick="{! c.myAction }" />
+        <lightning:button variant="destructive-text" label="Cancel Payment" title="Payment" onclick="{! c.myAction1 }" />
+    </div>
+</aura:component>

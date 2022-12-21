@@ -1,0 +1,74 @@
+<aura:component Controller="Product_Category_Controller" implements="forceCommunity:availableForAllPageTypes,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+   
+        
+   
+    <aura:attribute name="searchProduct"  type="String"/>
+    <aura:attribute name="productList" type="list"/>
+    <aura:attribute name = "col" type = "list"/>
+    <aura:attribute name = "products" type = "ID"/>
+    <aura:attribute name="Product2Id" type="String" />
+    
+    
+    
+    <!--these are attributes for cart items -->
+    
+    <div class="slds-align_absolute-center slds-m-top_medium"> 
+    <lightning:card title = "Welcome to E-Zone" iconName="custom:custom93">
+        <lightning:layout>
+            <lightning:layoutItem size = "8">
+            
+                
+                <div class="slds-m-left_medium"> 
+                    <lightning:input name="searchProduct" label="Search Product" value="{!v.searchProduct}" 
+                                     type = "search"/>  
+                </div>
+                
+                <lightning:button class="slds-align_absolute-center slds-m-top_medium"
+                                  name="click" variant="Brand"
+                                  label="Search Product"
+                                  onclick="{! c.searchingProduct }"/>
+            
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+    </div>
+    <!-- For Getting Product List -->
+    
+    
+    <!--for each -->
+    
+    <aura:if isTrue="{!!empty(v.productList)}">
+        <aura:iteration items="{!v.productList}" var="prod" >
+            <lightning:card title= "{!prod.Name}" iconName = "standard:product" class="--slds-c-card-color-border">
+                
+                    <div class="slds-m-left_medium">
+                        <p style="font-size:15px"><b>Price- {!prod.Price__c}</b></p>
+                        <br/><br/>
+                        <div class = "mybx">
+                            <div class="uiOutputRichText">       
+                                <ui:outputRichText value="{!prod.Product_Image__c}"/>
+                            </div>
+                        </div>
+                        <div class = "mybox2">
+                            <div class="uiOutputRichText">       
+                                <ui:outputRichText value="{!prod.Product_Specification__c}"/>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                <!-- For View Detail Button -->
+                
+                
+                    <lightning:button name="{!prod.Id}"
+                                      label="View Details"
+                                      variant="brand-outline"
+                                      onclick="{!c.viewRecordDetail}"/>
+                
+            </lightning:card>
+        </aura:iteration>
+    </aura:if>
+   
+   
+    
+</aura:component>

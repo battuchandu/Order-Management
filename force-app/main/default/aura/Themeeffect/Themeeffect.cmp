@@ -1,0 +1,18 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<lightning:carousel disableAutoScroll="false" disableAutoRefresh="false" scrollDuration = "3">
+     <lightning:carouselImage src="{!$Resource.StoreImage1}"
+                              header="Pick from Store"
+                              description="Pick your Choice"
+                              alternativeText="Reload Image"></lightning:carouselImage>
+     <lightning:carouselImage src="{!$Resource.Storeimage2}"
+                              header="Sports Store"
+                              description="This is store where you can see about all sports items"
+                              alternativeText="Reload Image">
+     </lightning:carouselImage>
+     <lightning:carouselImage src="{!$Resource.Storeimage3}"
+                              header="Shopping Items"
+                              description="Your Items"
+                              alternativeText="Cann't load this image.">
+     </lightning:carouselImage>
+  </lightning:carousel>
+</aura:component>

@@ -1,0 +1,104 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" 
+                controller="task15">
+    
+    <aura:attribute name="odd" type="Order__c[]"/>
+    <aura:attribute name="statuscheckeddata" type="list"/>
+    <aura:attribute name="customername" type="string"/>
+    <aura:attribute name="showModal" type="boolean" default="false"/>
+    <aura:attribute name="showcard" type="boolean" default="false"/>
+    <aura:attribute name="showcard1" type="boolean" default="false"/>
+    <aura:attribute name="showcard2" type="boolean" default="false"/>
+    <aura:attribute name="disable" type="boolean" default="false"/>
+    <aura:attribute name="recordid" type="string"/>
+  
+    <lightning:card class="input_style">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem>
+                <lightning:input label="Enter Name:" value="{!v.customername}"/>
+                <br/>
+                <lightning:button label="Search" onclick="{!c.callme}"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+    
+    <aura:if isTrue="{!v.showcard}">
+        <lightning:card>
+            <lightning:layout>
+                <aura:iteration items="{!v.odd}" var="od">
+                    <lightning:layoutItem size="2">
+                        Order number             :{!od.Name}<br/>
+                        Estimated Delivery Date  :{!od.Expected_Delivery_Date__c}<br/>
+                        Total Amount             :{!od.Total__c}<br/>
+                        Shipping address         :{!od.Shipping_Address__c}<br/>
+                        Billing Address          {!od.Billing_Address__c}<br/>
+                        
+                    </lightning:layoutItem>
+                </aura:iteration>   
+            </lightning:layout>
+            <aura:set attribute="actions">
+                <lightning:button label="cancel" onclick="{!c.check}"/>
+                <lightning:button label="Reorder" onclick="{!c.Reorder}"/>
+            </aura:set>
+        </lightning:card>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showcard1}">
+        <lightning:card>
+            <aura:set attribute="actions">
+                <lightning:button label="cancel" onclick="{!c.showModal}"/>
+                
+                <aura:if isTrue="{!v.showModal}">
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" 
+                             aria-modal="true" aria-describedby="modal-content-id-1" 
+                             class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container">
+                            <!--Modal/Popup Box Body Starts here-->
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <b> Are you sure you want to cancel the order! </b>
+                            </div>
+                            <!--Modal/Popup Box Footer Starts here-->
+                            <footer class="slds-modal__footer"> 
+                                <lightning:button variant="neutral" label="Yes,cancel"  onclick="{!c.cancel}"/>
+                                <lightning:button variant="neutral" label="No,don't cancel"  onclick="{!c.hideModel}"/>
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </aura:if>
+            </aura:set>
+            <lightning:layout> 
+                <aura:iteration items="{!v.statuscheckeddata}" var="od2">
+                    <lightning:layoutItem size="2">
+                        <lightning:input type="checkbox" name="{!od2.Id}" onchange="{!c.disable}" disabled="{!v.disable}"/>
+                        Order number             :{!od2.Name}<br/>
+                        Estimated Delivery Date  :{!od2.Expected_Delivery_Date__c}<br/>
+                        Total Amount             :{!od2.Total__c}<br/>
+                        Shipping address         :{!od2.Shipping_Address__c}<br/>
+                        Billing Address          :{!od2.Billing_Address__c}<br/>
+                    </lightning:layoutItem>
+                </aura:iteration>   
+            </lightning:layout>
+        </lightning:card>
+    </aura:if>
+  
+    <aura:if isTrue="{!v.showcard2}">
+        <lightning:card>
+            <aura:set attribute="actions">
+                <lightning:button label="Back" onclick="{!c.callme}"/>
+                <lightning:button label="Reorder" onclick="{!c.reorder}"/>
+            </aura:set>
+            <lightning:layout>
+                <aura:iteration items="{!v.odd}" var="od">
+                    <lightning:input type="checkbox" name="{!od.Id}" onchange="{!c.disable}" disabled="{!v.disable}"/>
+                    <lightning:layoutItem size="2">
+                        Order number             :{!od.Name}<br/>
+                        Estimated Delivery Date  :{!od.Expected_Delivery_Date__c}<br/>
+                        Total Amount             :{!od.Total__c}<br/>
+                        Shipping address         :{!od.Shipping_Address__c}<br/>
+                        Billing Address          {!od.Billing_Address__c}<br/>
+                    </lightning:layoutItem>
+                </aura:iteration>   
+            </lightning:layout>
+        </lightning:card>
+    </aura:if>
+</aura:component>

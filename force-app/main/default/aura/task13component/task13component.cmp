@@ -1,0 +1,47 @@
+<aura:component controller="task13">
+    <aura:attribute name="cname" type="string"/>
+    <aura:attribute name="addbook" type="Address_Book__c[]"/>
+    <lightning:card class="input_style">
+        <lightning:input label="Enter customer name:" value="{!v.cname}" />
+        <br></br>
+        <div class="slds-align_absolute-center">
+            <lightning:button label="search" variant="success" onclick="{!c.callme}" />
+        </div>        
+    </lightning:card>
+    <lightning:card>
+        <lightning:layout horizontalAlign="space">
+            
+            <aura:iteration items="{!v.addbook}" var="a">
+                <aura:if isTrue="{!a.Name=='Shipping address'}">
+                    <lightning:layoutItem padding="around-small">
+                        <h1>Shipping address</h1>
+                        <br/>
+                        Street:     {!a.Street__c}<br></br>
+                        state:      {!a.State__c}<br></br>
+                        city:       {!a.City__c}<br></br>
+                        country:    {!a.Country__c}<br></br>
+                        postal code:{!a.Postal_Code__c}<br></br>
+                        Land mark:  {!a.Land_Mark__c}<br></br>
+                    </lightning:layoutItem>
+                    
+                </aura:if>
+            </aura:iteration>
+            <aura:iteration items="{!v.addbook}" var="b">
+                <aura:if isTrue="{!b.Name=='Billing address'}">
+                    <lightning:layoutItem padding="around-small">
+                        <h1>Billing address</h1>
+                        <br/>
+                        Street:     {!b.Street__c}<br></br>
+                        state:      {!b.State__c}<br></br>
+                        city:       {!b.City__c}<br></br>
+                        country:    {!b.Country__c}<br></br>
+                        postal code:{!b.Postal_Code__c}<br></br>
+                        Land mark:  {!b.Land_Mark__c}<br></br>
+                    </lightning:layoutItem>
+                    
+                </aura:if>
+            </aura:iteration>
+            
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

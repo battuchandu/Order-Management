@@ -1,0 +1,31 @@
+<aura:component controller="Product_list_page" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="ID" type="string" ></aura:attribute>
+    <aura:attribute name="Prdt" type="List"/>
+    <aura:attribute name="Prd" type="List"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.prddetail}" />
+     
+    <div style="background-color:bisque;">
+    <div style="width: 300px;">
+    <aura:iteration items="{!v.Prd}" var="prd" indexVar="prd.prdt.Id" >
+    <lightning:carousel disableAutoRefresh="false" disableAutoScroll="false">
+        <aura:iteration items="{!prd.Prdimg}" var="prdimg" indexVar="prdimg.Id" >
+        <lightning:carouselImage
+            src = "{!prdimg.URL__c}"           
+            alternativeText = "Not available"
+            >
+            
+        </lightning:carouselImage>
+        </aura:iteration>
+    </lightning:carousel>
+    </aura:iteration>
+    </div>
+    <br></br><b>{!v.Prd[0].prdt.Name}</b>
+    <br></br><b>Price : </b>₹{!v.Prd[0].prdt.Price__c}
+    <br></br><b>Inventory : </b>{!v.Prd[0].prdt.Inventory__c}
+    <br></br><b>Remaining Quantity : </b>{!v.Prd[0].prdt.Remaining_Quantity__c}
+    <br></br><b>Description : </b>{!v.Prd.prdt.Description}
+    <br></br><lightning:icon iconName="standard:webcart" alternativeText="Add_to_cart" title="Add_to_cart" />
+     </div> 
+
+</aura:component>

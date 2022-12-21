@@ -1,0 +1,9 @@
+<aura:component controller = "ApplyCoupon" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <aura:attribute name="inputvalue" type="String"/>
+    <aura:attribute name="returnvalue" type="String"/>
+    
+    <lightning:input type="search" class="slds-lookup__search-input slds-input" value = "{!v.inputvalue}" placeholder="Type Here" />
+     <lightning:button variant="brand" label="Check Coupon" title="Brand action" onclick="{!c.handleClick }" />
+    {!v.returnvalue}
+</aura:component>
